@@ -21,7 +21,7 @@ function counter_inc() {
 
 
 	//Make a request
-	req.open('GET','http://localhost:80/counter_increment',true);
+	req.open('GET','http://arshadmohammed0141.imad.hasura-app.io/counter_increment',true);
 	req.send(null);
 
 	// count = count + 1
@@ -79,6 +79,31 @@ sub.onclick=function(){
 }
 */
 
+var submit_bt = document.getElementById('submit_btn');
+submit_bt.onClick=function(){
+    var request = new XMLHttpRequest();
+    request.onreadystatechange() = function(){
+        
+    }
+    
+    
+    var username=document.getElementById('username');
+    var password=document.getElementById('password');
+    console.log(username);
+    console.log(password);
+    
+    req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/login',true);
+    req.setRequestHeader('Content-Type','application/json');
+	req.send(JSON.stringify({username:username,password:password}));
+}
+
+
+
+
+
+
+
+
 var nameInput=document.getElementById('naam');
 var sub=document.getElementById('submit');
 sub.onclick=function(){
@@ -106,7 +131,7 @@ sub.onclick=function(){
 
 
 	//Make a request
-	req.open('GET','http://localhost:80/submit-name?name=' + nameInput.value,true);
+	req.open('GET','http://arshadmohammed0141.imad.hasura-app.io/submit-name?name=' + nameInput.value,true);
 	req.send(null);
 
 	

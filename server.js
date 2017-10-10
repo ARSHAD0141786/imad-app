@@ -41,6 +41,10 @@ app.get('/hash/:input',function(req,res){
     res.send(hashedString);
 });
 
+app.get('/ui/profile.html',function(req,res){
+    res.sendFile(path.join(__dirname,'ui','profile.html'));
+});
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });

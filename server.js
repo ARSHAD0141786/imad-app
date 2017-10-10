@@ -57,13 +57,24 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-var counter = 0;
-function counter_increment(){
-    counter+=1;
-    return counter;
-}
-app.get('/counter-increment',function(req,res){
-    res.send(counter_increment());
+var counter=0;
+app.get('/counter_display',function(req,res){
+	res.send(counter.toString());
+});
+
+app.get('/counter_increment',function(req,res){
+	counter=counter+1;
+	console.log('counter incremented');
+	res.send(counter.toString());
+});
+
+var names=[];
+app.get('/submit-name',function(req,res){
+	//get the name form request
+	var name=req.query.name;
+	names.push(name);
+	//JSON : Javascript Object Notation
+	res.send(JSON.stringify(names));
 });
 
 app.get('/test-db',function(req,res){

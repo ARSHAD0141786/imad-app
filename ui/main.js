@@ -81,9 +81,17 @@ sub.onclick=function(){
 
 var submit_bt = document.getElementById('submit_btn');
 submit_bt.onClick=function(){
-    var request = new XMLHttpRequest();
-    request.onreadystatechange() = function(){
-        
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+        if(req.readyState===XMLHttpRequest.DONE){
+            if(req.status===200){
+                alert('Successfully Login');
+            }else if(req.status===403){
+                alert('username/password is incorrect');
+            }else if(req.status===500){
+                alert('Something went wrong on server');
+            }
+        }
     }
     
     

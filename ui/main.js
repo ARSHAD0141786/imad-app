@@ -80,6 +80,7 @@ sub.onclick=function(){
 */
 
 var submit_bt = document.getElementById('submit_btn');
+console.log('submit');
 submit_bt.onClick=function(){
     console.log('login btn pressed.');
     var req = new XMLHttpRequest();

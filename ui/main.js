@@ -121,7 +121,8 @@ sub.onclick=function(){
 
 var nameInput=document.getElementById('naam');
 var submit_button=document.getElementById('submit');
-submit_button.onclick=function (){
+
+function display_comments(){
 		//Create a request
 	console.log('comment btn pressed');
 	var req=new XMLHttpRequest();
@@ -151,4 +152,8 @@ submit_button.onclick=function (){
 	req.send(null);
 
 	
-};
+}
+display_comments();
+submit_button.onclick=function(){
+    display_comments();
+}

@@ -31,7 +31,7 @@ function counter_inc() {
 
 function counter_disp() {
 	//Create a request
-	console.log("Counter function invoked");
+	console.log("Counter display function invoked");
 	var req=new XMLHttpRequest();
 
 	//Capture the response and store it in a variable

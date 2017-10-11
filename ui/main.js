@@ -84,7 +84,7 @@ sub.onclick=function(){
 }
 */
 
-var submit_bt = document.getElementById('submit');
+var submit_bt = document.getElementById('submit_btn');
 console.log(submit_bt);
 submit_bt.onclick=function(){
     console.log('login btn pressed.');

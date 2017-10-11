@@ -114,7 +114,7 @@ submit_bt.onClick=function(){
 
 var nameInput=document.getElementById('naam');
 var sub=document.getElementById('submit');
-sub.onclick=function(){
+sub.onClick=function(){
 		//Create a request
 	var req=new XMLHttpRequest();
 

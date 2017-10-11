@@ -142,7 +142,7 @@ function display_comments(){
 				ul.innerHTML=list;
 			}
 		}
-	}
+	};
 
 
 	//Make a request
@@ -154,4 +154,4 @@ function display_comments(){
 display_comments();
 submit_button.onclick=function(){
     display_comments();
-}
+};

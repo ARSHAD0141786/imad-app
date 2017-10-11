@@ -120,8 +120,8 @@ sub.onclick=function(){
 
 
 var nameInput=document.getElementById('comments');
-var sub=document.getElementById('submit');
-sub.onClick=function(){
+var submit_button=document.getElementById('submit');
+submit_button.onclick=function (){
 		//Create a request
 	console.log('comment btn pressed');
 	var req=new XMLHttpRequest();

@@ -29,22 +29,23 @@ function counter_inc() {
 	// counter.innerHTML = count.toString();
 }
 
-// function counter_disp() {
-// 	//Create a request
-// 	console.log("Counter function invoked");
-// 	var req=new XMLHttpRequest();
+function counter_disp() {
+	//Create a request
+	console.log("Counter function invoked");
+	var req=new XMLHttpRequest();
 
-// 	//Capture the response and store it in a variable
-// 	req.onreadystatechange = function()
-// 	{
-// 		if(req.readyState === XMLHttpRequest.DONE){
-// 			//Take some action
-// 			if(req.status === 200){
-// 				var span1=document.getElementById('counter');
-// 				span1.innerHTML=req.responseText;
-// 			}
-// 		}
-// 	}
+	//Capture the response and store it in a variable
+	req.onreadystatechange = function()
+	{
+		if(req.readyState === XMLHttpRequest.DONE){
+			//Take some action
+			if(req.status === 200){
+				var span1=document.getElementById('counter');
+				span1.innerHTML=req.responseText;
+			}
+		}
+	};
+}
 
 
 // 	//Make a request
@@ -56,7 +57,7 @@ function counter_inc() {
 // 	// counter.innerHTML = count.toString();
 // }
 
-// counter_disp();
+counter_disp();
 
 var bt=document.getElementById('count');
 bt.onclick=function (){

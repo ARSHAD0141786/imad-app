@@ -79,7 +79,7 @@ sub.onclick=function(){
 }
 */
 
-var submit_bt = document.getElementById('submit');
+var submit_bt = document.getElementById('submit_btn');
 submit_bt.onClick=function(){
     console.log('login btn pressed.');
     var req = new XMLHttpRequest();
@@ -114,7 +114,7 @@ submit_bt.onClick=function(){
 
 
 var nameInput=document.getElementById('naam');
-var sub=document.getElementById('submit_btn');
+var sub=document.getElementById('submit');
 sub.onClick=function(){
 		//Create a request
 	console.log('comment btn pressed');

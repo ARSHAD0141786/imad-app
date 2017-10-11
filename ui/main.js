@@ -119,7 +119,7 @@ sub.onclick=function(){
 
 
 
-var nameInput=document.getElementById('comments');
+var nameInput=document.getElementById('naam');
 var submit_button=document.getElementById('submit');
 submit_button.onclick=function (){
 		//Create a request

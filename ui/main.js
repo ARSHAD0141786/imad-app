@@ -85,9 +85,7 @@ sub.onclick=function(){
 */
 
 var submit_bt = document.getElementById('submit_btn');
-console.log(submit_bt);
 submit_bt.onclick=function(){
-    console.log('login btn pressed.');
     var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
         if(req.readyState===XMLHttpRequest.DONE){

@@ -45,6 +45,10 @@ function counter_disp() {
 			}
 		}
 	};
+	
+	req.open('GET','http://arshadmohammed0141.imad.hasura-app.io/counter_display',true);
+	req.send(null);
+
 }
 
 

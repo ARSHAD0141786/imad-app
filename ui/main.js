@@ -84,33 +84,33 @@ sub.onclick=function(){
 }
 */
 
-var submit_bt = document.getElementById('submit_btn');
-console.log('submit');
-submit_bt.onClick=function(){
-    console.log('login btn pressed.');
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function(){
-        if(req.readyState===XMLHttpRequest.DONE){
-            if(req.status===200){
-                alert('Successfully Login');
-            }else if(req.status===403){
-                alert('username/password is incorrect');
-            }else if(req.status===500){
-                alert('Something went wrong on server');
-            }
-        }
-    };
+// var submit_bt = document.getElementById('submit_btn');
+// console.log('submit');
+// submit_bt.onClick=function(){
+//     console.log('login btn pressed.');
+//     var req = new XMLHttpRequest();
+//     req.onreadystatechange = function(){
+//         if(req.readyState===XMLHttpRequest.DONE){
+//             if(req.status===200){
+//                 alert('Successfully Login');
+//             }else if(req.status===403){
+//                 alert('username/password is incorrect');
+//             }else if(req.status===500){
+//                 alert('Something went wrong on server');
+//             }
+//         }
+//     };
     
     
-    var username=document.getElementById('username');
-    var password=document.getElementById('password');
-    console.log(username);
-    console.log(password);
+//     var username=document.getElementById('username');
+//     var password=document.getElementById('password');
+//     console.log(username);
+//     console.log(password);
     
-    req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/login',true);
-    req.setRequestHeader('Content-Type','application/json');
-	req.send(JSON.stringify({username:username,password:password}));
-};
+//     req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/login',true);
+//     req.setRequestHeader('Content-Type','application/json');
+// 	req.send(JSON.stringify({username:username,password:password}));
+// };
 
 
 

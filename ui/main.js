@@ -81,6 +81,7 @@ sub.onclick=function(){
 
 var submit_bt = document.getElementById('submit');
 submit_bt.onClick=function(){
+    console.log('login btn pressed.');
     var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
         if(req.readyState===XMLHttpRequest.DONE){
@@ -116,6 +117,7 @@ var nameInput=document.getElementById('naam');
 var sub=document.getElementById('submit_btn');
 sub.onClick=function(){
 		//Create a request
+	console.log('comment btn pressed');
 	var req=new XMLHttpRequest();
 
 	//Capture the response and store it in a variable

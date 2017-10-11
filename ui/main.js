@@ -17,7 +17,7 @@ function counter_inc() {
 				span1.innerHTML=req.responseText;
 			}
 		}
-	}
+	};
 
 
 	//Make a request
@@ -61,7 +61,7 @@ function counter_inc() {
 var bt=document.getElementById('count');
 bt.onclick=function (){
 	counter_inc();
-}
+};
 // submit names by using js no request is sent on the server
 /*
 var nameInput=document.getElementById('naam');
@@ -93,7 +93,7 @@ submit_bt.onClick=function(){
                 alert('Something went wrong on server');
             }
         }
-    }
+    };
     
     
     var username=document.getElementById('username');
@@ -104,7 +104,7 @@ submit_bt.onClick=function(){
     req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/login',true);
     req.setRequestHeader('Content-Type','application/json');
 	req.send(JSON.stringify({username:username,password:password}));
-}
+};
 
 
 
@@ -145,4 +145,4 @@ sub.onClick=function(){
 	req.send(null);
 
 	
-}
+};

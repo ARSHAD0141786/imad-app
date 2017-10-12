@@ -89,6 +89,7 @@ submit_bt.onclick=function(){
     var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
         if(req.readyState===XMLHttpRequest.DONE){
+            console.log('reasdy state changed.')
             if(req.status===200){
                 alert('Successfully Login');
             }else if(req.status===403){
@@ -102,9 +103,6 @@ submit_bt.onclick=function(){
     
     var username=document.getElementById('username').value;
     var password=document.getElementById('password').value;
-    console.log(username);
-    console.log(password);
-    
     req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/login',true);
     req.setRequestHeader('Content-Type','application/json');
 	req.send(JSON.stringify({username:username,password:password}));

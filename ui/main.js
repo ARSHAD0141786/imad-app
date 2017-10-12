@@ -114,11 +114,8 @@ register_bt.onclick=function(){
     var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
         if(req.readyState===XMLHttpRequest.DONE){
-            console.log('reasdy state changed.')
             if(req.status===200){
-                alert('Successfully Login');
-            }else if(req.status===403){
-                alert('username/password is incorrect');
+                alert('User successfully created');
             }else if(req.status===500){
                 alert('Something went wrong on server');
             }

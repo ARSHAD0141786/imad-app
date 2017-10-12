@@ -109,6 +109,30 @@ submit_bt.onclick=function(){
 };
 
 
+var register_bt = document.getElementById('register_btn');
+register_bt.onclick=function(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+        if(req.readyState===XMLHttpRequest.DONE){
+            console.log('reasdy state changed.')
+            if(req.status===200){
+                alert('Successfully Login');
+            }else if(req.status===403){
+                alert('username/password is incorrect');
+            }else if(req.status===500){
+                alert('Something went wrong on server');
+            }
+        }
+    };
+    
+    
+    var username=document.getElementById('username').value;
+    var password=document.getElementById('password').value;
+    req.open('POST','http://arshadmohammed0141.imad.hasura-app.io/create-user',true);
+    req.setRequestHeader('Content-Type','application/json');
+	req.send(JSON.stringify({username:username,password:password}));
+};
+
 
 
 

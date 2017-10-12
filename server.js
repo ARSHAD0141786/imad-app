@@ -55,7 +55,7 @@ app.post('/login',function(req,res){
                 if(hashedPass===dbString){
                     res.send('Credentials correct');
                 }else{
-                    res.status(403).send('username/password');
+                    res.status(403).send('username is found but password not matched.');
                 }
             }
         }

@@ -76,7 +76,7 @@ app.post('/login',function(req,res){
 
 
 app.get('/check-login',function(req,res){
-    res.send(req.session +' '+ req.session.auth +' '+ req.session.auth.userId);
+    console.log(req.session +' '+ req.session.auth +' '+ req.session.auth.userId);
     if(req.session && req.session.auth && req.session.auth.userId){
         res.send('You are logged in  : ',+req.session.auth.userId.toString());
     }else{

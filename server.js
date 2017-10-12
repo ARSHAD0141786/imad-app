@@ -49,7 +49,7 @@ app.post('/login',function(req,res){
             }else{
                 //match password
                 res.send('Credentials correct');
-                var dbString=result.rows[0].password;
+                var dbString=result.rows[0].password_string;
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);
                 if(hashedPass===dbString){

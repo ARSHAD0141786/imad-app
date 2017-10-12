@@ -61,7 +61,7 @@ app.post('/login',function(req,res){
                 if(hashedPass===dbString){
                     //make session
                     console.log(result.rows[0].password_string);
-                    req.session.auth={userId : result.rows[0].username};
+                    req.session.auth = {userId : result.rows[0].username};
                     //set cookie with a session internally on the server side it maps the session id 
                     //to an object {auth:{userId}}
                     
@@ -76,7 +76,6 @@ app.post('/login',function(req,res){
 
 
 app.get('/check-login',function(req,res){
-    console.log(req.session +' '+ req.session.auth +' '+ req.session.auth.userId);
     if(req.session && req.session.auth && req.session.auth.userId){
         res.send('You are logged in  : ',+req.session.auth.userId.toString());
     }else{

@@ -48,6 +48,7 @@ app.post('/login',function(req,res){
                 res.status(403).send('username/password is invalid');
             }else{
                 //match password
+                console.log('username found but password cannot be fetched.');
                 var dbString=result.rows[0].password;
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);

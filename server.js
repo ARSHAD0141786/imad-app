@@ -38,7 +38,7 @@ app.post('/create-user',function(req,res){
         if(err){
             res.status(500).send(err.toString() + 'Server problem kar raha hai');
         }else{
-            res.send(JSON.stringify({message:"User created successfully : "+username}));
+            res.send(JSON.stringify({message:"User created sxvmkcuccessfully : "+username}));
         }
     });
 });

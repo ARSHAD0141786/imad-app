@@ -50,6 +50,36 @@ app.post('/create-user-for-my-app',function(req,res){
     });
 });
 
+app.post('/login-for-my-app',function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            if(result.rows.length===0){
+                res.status(403).send('username is invalid');
+            }else{
+                //match password
+                var dbString=result.rows[0].password_string;
+                var salt=dbString.split('$')[2];
+                var hashedPass=hash(password,salt);
+                if(hashedPass===dbString){
+                    //make session
+                    req.session.auth = {userId : result.rows[0].username};
+                    //set cookie with a session internally on the server side it maps the session id 
+                    //to an object {auth:{userId}}
+                    
+                    res.send(JSON.stringify( {message:"SignIn successfully"} ));
+                }else{
+                    res.status(403).send('username is found but password not matched.');
+                }
+            }
+        }
+    });
+});
+
 
 app.post('/create-user',function(req,res){
     var username = req.body.username;
@@ -68,7 +98,6 @@ app.post('/create-user',function(req,res){
 app.post('/login',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
-    var i1 = 0;
     
     pool.query('SELECT *FROM user123 WHERE username = $1',[username],function(err,result){
         if(err){

@@ -29,6 +29,28 @@ function hash(input,salt){
     return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
 }
 
+app.post('/create-user-for-my-app',function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    var name = req.body.name;
+    var year = req.body.year;
+    var hostel = req.body.hostel;
+    var phone = req.body.phone;
+    var branch = req.body.branch;
+    
+    
+    var salt = crypto.randomBytes(128).toString('hex');
+    var dbString = hash(password,salt);
+    pool.query('INSERT INTO "user_data" (username,password_string,name,hostel,branch,year,phone_number) VALUES ($1,$2,$3,$4,$5,$6,$7)',[username,dbString,name,hostel,branch,year,phone],function(err,result){
+        if(err){
+            res.status(500).send(err.toString() + 'Server problem kar raha hai');
+        }else{
+            res.send(JSON.stringify({message:"User created successfully : "+username}));
+        }
+    });
+});
+
+
 app.post('/create-user',function(req,res){
     var username = req.body.username;
     var password = req.body.password;

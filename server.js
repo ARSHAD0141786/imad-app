@@ -82,7 +82,7 @@ app.post('/login-for-my-app',function(req,res){
 
 app.get('/get-mess-list-for-my-app',function(req,res){
     
-    pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(req,res){
+    pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(err,result){
        if(err){
            res.status(500).send(err.toString());
        } else{

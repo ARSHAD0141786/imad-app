@@ -82,13 +82,17 @@ app.post('/login-for-my-app',function(req,res){
 
 app.get('/get-mess-list-for-my-app',function(req,res){
     
-    pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(err,result){
-       if(err){
-           res.status(500).send(err.toString());
-       } else{
-           res.send(JSON.stringify(result.rows));
-       }
-    });
+    if(req.session && req.session.auth && req.session.auth.userId){
+        pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(err,result){
+           if(err){
+               res.status(500).send(err.toString());
+           } else{
+               res.send(JSON.stringify(result.rows));
+           }
+        });
+    }else{
+        res.status(500).send("You are not logged in");
+    }
 });
 
 app.post('/get-mess-data-for-my-app',function(req,res){

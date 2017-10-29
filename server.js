@@ -83,7 +83,7 @@ app.post('/login-for-my-app',function(req,res){
 app.get('/get-mess-list-for-my-app',function(req,res){
     
     if(req.session && req.session.auth && req.session.auth.userId){
-        pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(err,result){
+        pool.query('SELECT hostel.name,mess_data.*,statu.status_name *FROM hostel,mess_data,status WHERE hostel.id=mess_data.hostel,mess_data.status=status.status_code',function(err,result){
            if(err){
                res.status(500).send(err.toString());
            } else{

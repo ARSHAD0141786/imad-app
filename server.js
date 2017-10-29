@@ -80,6 +80,17 @@ app.post('/login-for-my-app',function(req,res){
     });
 });
 
+app.get('/get-mess-list-for-my-app',function(req,res){
+    
+    pool.query('SELECT *FROM hostel,mess_data WHERE hostel.id=mess_data.hostel',function(req,res){
+       if(err){
+           res.status(500).send(err.toString());
+       } else{
+           res.send(JSON.stringify(result.rows));
+       }
+    });
+});
+
 app.post('/get-mess-data-for-my-app',function(req,res){
     var hostel = req.body.hostel;
     

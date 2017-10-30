@@ -71,7 +71,7 @@ app.post('/login-for-my-app',function(req,res){
                     //set cookie with a session internally on the server side it maps the session id 
                     //to an object {auth:{userId}}
                     
-                    res.send(JSON.stringify( {message:"SignIn successfully"} ));
+                    res.send(JSON.stringify( {message:"SignIn successfully"},result.rows ));
                 }else{
                     res.status(403).send('username is found but password not matched.');
                 }

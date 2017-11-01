@@ -66,10 +66,7 @@ app.post('/login-for-my-app',function(req,res){
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);
                 if(hashedPass===dbString){
-                    //make session
-                   // req.session.auth = {userId : result.rows[0].username};
-                    //set cookie with a session internally on the server side it maps the session id 
-                    //to an object {auth:{userId}}
+                    
                     
                     res.send(JSON.stringify(result.rows));
                 }else{
@@ -106,6 +103,26 @@ app.post('/get-mess-data-for-my-app',function(req,res){
         }
     });
 });
+
+app.post('/create-worker-for-my-app',function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    var name = req.body.name;
+    var hostel = req.body.hostel;
+    var phone = req.body.phone;
+    
+    
+    var salt = crypto.randomBytes(128).toString('hex');
+    var dbString = hash(password,salt);
+    pool.query('INSERT INTO "worker_data" (username,password_string,name,hostel,phone_number) VALUES ($1,$2,$3,$4,$5)',[username,dbString,name,hostel,branch,year,phone],function(err,result){
+        if(err){
+            res.status(500).send(err.toString() + 'Server problem kar raha hai');
+        }else{
+            res.send(JSON.stringify({message:"User created successfully : "+username}));
+        }
+    });
+});
+
 
 app.post('/create-user',function(req,res){
     var username = req.body.username;

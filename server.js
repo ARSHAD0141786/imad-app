@@ -113,7 +113,7 @@ app.post('/create-worker-for-my-app',function(req,res){
     
     var salt = crypto.randomBytes(128).toString('hex');
     var dbString = hash(password,salt);
-    pool.query('INSERT INTO "worker_data" (username,password_string,name,hostel,phone_number) VALUES ($1,$2,$3,$4,$5)',[username,dbString,name,hostel,phone],function(err,result){
+    pool.query('INSERT INTO "worker_data" (username,password_string,name,hostel,phone) VALUES ($1,$2,$3,$4,$5)',[username,dbString,name,hostel,phone],function(err,result){
         if(err){
             res.status(500).send(err.toString() + 'Server problem kar raha hai');
         }else{

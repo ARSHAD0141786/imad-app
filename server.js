@@ -59,7 +59,7 @@ app.post('/login-for-my-app',function(req,res){
             res.status(500).send(err.toString());
         }else{
             if(result.rows.length===0){
-                res.status(403).send('username is invalid');
+                res.status(403).send('No user found');
             }else{
                 //match password
                 var dbString=result.rows[0].password_string;
@@ -73,7 +73,7 @@ app.post('/login-for-my-app',function(req,res){
                     
                     res.send(JSON.stringify(result.rows));
                 }else{
-                    res.status(403).send('username is found but password not matched.');
+                    res.status(403).send('Incorrect Password');
                 }
             }
         }
@@ -99,7 +99,7 @@ app.post('/get-mess-data-for-my-app',function(req,res){
             res.status(500).send(err.toString());
         }else{
             if(result.rows.length === 0){
-                res.status(403).send('hostel not present in mess_data');
+                res.status(403).send('No data found');
             }else{
                 res.send(JSON.stringify(result.rows));
             }

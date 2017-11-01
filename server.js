@@ -122,6 +122,32 @@ app.post('/create-worker-for-my-app',function(req,res){
     });
 });
 
+app.post('/worker-login-for-my-app',function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    pool.query('SELECT *FROM worker_data WHERE username = $1',[username],function(err,result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            if(result.rows.length===0){
+                res.status(403).send('No user found');
+            }else{
+                //match password
+                var dbString=result.rows[0].password_string;
+                var salt=dbString.split('$')[2];
+                var hashedPass=hash(password,salt);
+                if(hashedPass===dbString){
+                    
+                    
+                    res.send(JSON.stringify(result.rows));
+                }else{
+                    res.status(403).send('Incorrect Password');
+                }
+            }
+        }
+    });
+});
 
 app.post('/create-user',function(req,res){
     var username = req.body.username;

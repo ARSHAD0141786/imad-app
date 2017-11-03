@@ -163,7 +163,7 @@ app.post('upload-data-on-my-app',function(req,res){
         }else{
             res.send(JSON.stringify({message:"User created successfully : "+username}));
         }
-    })
+    });
 });
 
 app.post('/create-user',function(req,res){

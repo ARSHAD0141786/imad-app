@@ -151,7 +151,7 @@ app.post('/worker-login-for-my-app',function(req,res){
     });
 });
 
-app.post('upload-data-on-my-app',function(req,res){
+app.post('/upload-data-on-my-app',function(req,res){
     var items = req.body.items;
     var status = req.body.status;
     var isMenuUpdated = req.body.is_menu_updated;

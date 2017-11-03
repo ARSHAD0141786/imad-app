@@ -161,7 +161,7 @@ app.post('/upload-data-on-my-app',function(req,res){
         if(err){
             res.status(500).send(err.toString() + 'Server problem in inserting data');
         }else{
-            res.send(JSON.stringify({message:"User created successfully : "+username}));
+            res.send(JSON.stringify({message:"Data Uploaded successfully "}));
         }
     });
 });

@@ -104,6 +104,8 @@ app.post('/get-mess-data-for-my-app',function(req,res){
     });
 });
 
+// Allow insertion only when the user is logined check the session in case of browser
+
 app.post('/create-worker-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;

@@ -115,7 +115,7 @@ app.post('/create-worker-for-my-app',function(req,res){
     var dbString = hash(password,salt);
     pool.query('INSERT INTO "worker_data" (username,password_string,name,hostel,phone) VALUES ($1,$2,$3,$4,$5)',[username,dbString,name,hostel,phone],function(err,result){
         if(err){
-            res.status(500).send(err.toString() + 'Server problem kar raha hai');
+            res.status(500).send(err.toString() + 'Server problem in inserting data');
         }else{
             res.send(JSON.stringify({message:"User created successfully : "+username}));
         }
@@ -147,6 +147,21 @@ app.post('/worker-login-for-my-app',function(req,res){
             }
         }
     });
+});
+
+app.post('upload-data-on-my-app',function(req,res){
+    var items = req.body.items;
+    var status = req.body.status;
+    var isMenuUpdated = req.body.is_menu_updated;
+    var hostel = req.body.hostel;
+    
+    pool.query('INSERT INTO mess_data (hostel,is_menu_updated,items,status) VALUES($1,$2,$3,$4)',[hostel,is_menu_updated,items,status],function(err,result){
+        if(err){
+            res.status(500).send(err.toString() + 'Server problem in inserting data');
+        }else{
+            res.send(JSON.stringify({message:"User created successfully : "+username}));
+        }
+    })
 });
 
 app.post('/create-user',function(req,res){

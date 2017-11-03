@@ -157,7 +157,7 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('INSERT INTO mess_data (hostel,is_menu_updated,items,status) VALUES($1,$2,$3,$4)',[hostel,is_menu_updated,items,status],function(err,result){
+    pool.query('INSERT INTO mess_data (hostel,is_menu_updated,items,status) VALUES($1,$2,$3,$4)',[hostel,isMenuUpdated,items,status],function(err,result){
         if(err){
             res.status(500).send(err.toString() + 'Server problem in inserting data');
         }else{

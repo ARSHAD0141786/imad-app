@@ -161,6 +161,8 @@ app.post('/send-feedback-for-messes',function(req,res){
             var ratingCleaning = result.rows[1];
             var users = result.rows[2];
             
+            console.log("Values : kasd;l  "+ratingFood+" "+ratingCleaning+" "+users);
+            
             var updatedRatingFood = (ratingFood * users + foodRating)/(users + 1);
             var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
             var updatedUsers = users + 1;

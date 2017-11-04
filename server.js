@@ -158,7 +158,7 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('DELETE FORM mess_data WHERE hostel = $1',[hostel],function(err.result){
+    pool.query('DELETE FORM mess_data WHERE hostel = $1',[hostel],function(err,result){
         if(err){
             res.status(500).send(err.toString() + 'Server problem in deleting record');
         }else{

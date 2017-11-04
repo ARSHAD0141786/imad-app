@@ -150,6 +150,7 @@ app.post('/send-feedback-for-messes',function(req,res){
     var foodRating = req.body.food_rating;
     var cleaningRating = req.body.cleaning_rating;
     var hostelId = req.body.hostel_id;
+    var username = req.body.usernme;
     
     pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
         if(err){
@@ -167,7 +168,14 @@ app.post('/send-feedback-for-messes',function(req,res){
                 if(err){
                     res.status(500).send(err.toString());
                 }else{
-                    res.send(JSON.stringify({message:"Thankyou for the feedback"}));
+                    pool.query('UPDATE user_data SET is_rated = true WHERE username = $1',[username],function(err,result){
+                        if(err){
+                            res.status(500).send(err.toString());
+                        }else{
+                            res.send(JSON.stringify({message:"Thankyou for the feedback"}));
+                        }
+                    });
+                    
                 }
             });
         }

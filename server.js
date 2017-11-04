@@ -91,7 +91,7 @@ app.get('/get-mess-list-for-my-app',function(req,res){
 app.post('/get-mess-data-for-my-app',function(req,res){
     var hostel = req.body.hostel;
     
-    pool.query('SELECT *FROM mess_data WHERE hostel = $1',[hostel],function(req,res){
+    pool.query('SELECT *FROM mess_data WHERE hostel = $1',[hostel],function(err,result){
         if(err){
             res.status(500).send(err.toString());
         }else{
@@ -104,7 +104,6 @@ app.post('/get-mess-data-for-my-app',function(req,res){
     });
 });
 
-// Allow insertion only when the user is logined check the session in case of browser
 
 app.post('/create-worker-for-my-app',function(req,res){
     var username = req.body.username;
@@ -150,6 +149,8 @@ app.post('/worker-login-for-my-app',function(req,res){
         }
     });
 });
+
+// Allow insertion only when the user is logined check the session in case of browser
 
 app.post('/upload-data-on-my-app',function(req,res){
     var items = req.body.items;

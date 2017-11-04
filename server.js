@@ -177,7 +177,6 @@ app.post('/send-feedback-for-messes',function(req,res){
                             res.send(JSON.stringify({message:"Thankyou for the feedback"}));
                         }
                     });
-                    
                 }
             });
         }

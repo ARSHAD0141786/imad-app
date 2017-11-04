@@ -165,7 +165,7 @@ app.post('/send-feedback-for-messes',function(req,res){
             var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
             var updatedUsers = users + 1;
             
-            pool.query('UPDATE rating SET food_rating = $1,SET cleaning_rating = $2,SET users = $3',[updatedRatingFood,updatedRatingCleaning,updatedUers],function(err,result){
+            pool.query('UPDATE rating SET food_rating = $1,SET cleaning_rating = $2,SET users = $3',[updatedRatingFood,updatedRatingCleaning,updatedUsers],function(err,result){
                 if(err){
                     res.status(500).send(err.toString);
                 }else{

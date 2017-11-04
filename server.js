@@ -155,9 +155,9 @@ app.post('/send-feedback-for-messes',function(req,res){
         if(err){
             res.status(500).send(err.toString);
         }else{
-            var ratingFood = result.rows[0].row[0];
-            var ratingCleaning = result.rows[1];
-            var users = result.rows[2];
+            var ratingFood = result.rows[0].food_rating;
+            var ratingCleaning = result.rows[0].cleaning_rating;
+            var users = result.rows[0].users;
             
             console.log("Values : kasd;l  "+ratingFood+" "+ratingCleaning+" "+users);
             

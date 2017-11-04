@@ -158,6 +158,14 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
+    pool.query('DELETE FORM mess_data WHERE hostel = $1',[hostel],function(err.result){
+        if(err){
+            res.status(500).send(err.toString() + 'Server problem in deleting record');
+        }else{
+            res.send(JSON.stringify({message:"Data deleted successfully"}));
+        }
+    });
+    
     pool.query('INSERT INTO mess_data (hostel,is_menu_updated,items,status) VALUES($1,$2,$3,$4)',[hostel,isMenuUpdated,items,status],function(err,result){
         if(err){
             res.status(500).send(err.toString() + 'Server problem in inserting data');

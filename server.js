@@ -159,11 +159,14 @@ app.post('/send-feedback-for-messes',function(req,res){
             var ratingCleaning = result.rows[0].cleaning_rating;
             var users = result.rows[0].users;
             
-            console.log("Values : kasd;l  "+ratingFood+" "+ratingCleaning+" "+users);
+            
+            
             
             var updatedRatingFood = (ratingFood * users + foodRating)/(users + 1);
             var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
             var updatedUsers = users + 1;
+            
+            console.log("Values : kasd;l  "+updatedRatingFood+" "+updatedRatingCleaning+" "+updatedUsers);
             
             pool.query('UPDATE rating SET food_rating = $1,SET cleaning_rating = $2,SET users = $3',[updatedRatingFood,updatedRatingCleaning,updatedUsers],function(err,result){
                 if(err){

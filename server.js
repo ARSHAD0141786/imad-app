@@ -139,8 +139,6 @@ app.post('/worker-login-for-my-app',function(req,res){
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);
                 if(hashedPass===dbString){
-                    
-                    
                     res.send(JSON.stringify(result.rows));
                 }else{
                     res.status(403).send('Incorrect Password');
@@ -148,6 +146,35 @@ app.post('/worker-login-for-my-app',function(req,res){
             }
         }
     });
+});
+
+app.post('/send-feedback-for-messes',function(req,res){
+    var foodRating = req.body.food_rating;
+    var cleaningRating = req.body.cleaning_rating;
+    var hostelId = req.body.hostel_id;
+    
+    pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
+        if(err){
+            res.status(500).send(err.toString);
+        }else{
+            var ratingFood = result.rows[0];
+            var ratingCleaning = result.rows[1];
+            var users = result.rows[2];
+            
+            var updatedRatingFood = (ratingFood * users + foodRating)/(users + 1);
+            var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
+            var updatedUsers = users + 1;
+            
+            pool.query('UPDATE rating SET food_rating = $1,SET cleaning_rating = $2,SET users = $3',[updatedRatingFood,updatedRatingCleaning,updatedUers],function(err,result){
+                if(err){
+                    res.status(500).send(err.toString);
+                }else{
+                    res.send(JSON.stringify({message:"Thankyou for the feedback"}));
+                }
+            });
+        }
+    });
+    
 });
 
 // Allow insertion only when the user is logined check the session in case of browser

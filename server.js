@@ -154,7 +154,7 @@ app.post('/send-feedback-for-messes',function(req,res){
     
     pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
         if(err){
-            
+            res.status(500).send(err.toString);
         }else{
             if(!result.rows[0].is_rated){
                 pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){

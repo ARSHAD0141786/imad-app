@@ -152,7 +152,7 @@ app.post('/send-feedback-for-messes',function(req,res){
     var hostelId = req.body.hostel_id;
     var username = req.body.username;
     
-    pool.query('SELECT is_rated FROM user_data WHERE username = $1',[username],function(err,result){
+    pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
         if(err){
             
         }else{

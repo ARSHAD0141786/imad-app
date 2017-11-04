@@ -150,7 +150,7 @@ app.post('/send-feedback-for-messes',function(req,res){
     var foodRating = req.body.food_rating;
     var cleaningRating = req.body.cleaning_rating;
     var hostelId = req.body.hostel_id;
-    var username = req.body.usernme;
+    var username = req.body.username;
     
     pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
         if(err){

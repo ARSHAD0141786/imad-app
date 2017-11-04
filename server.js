@@ -79,7 +79,7 @@ app.post('/login-for-my-app',function(req,res){
 
 app.get('/get-mess-list-for-my-app',function(req,res){
     
-   pool.query('SELECT hostel.name,mess_data.*,mess_status.status_name FROM hostel,mess_data,mess_status,rating WHERE hostel.id = mess_data.hostel and mess_data.status = mess_status.status_code and mess_data.hostel = rating.hostel ORDER BY rating.food_rating',function(err,result){
+   pool.query('SELECT hostel.name,mess_data.*,mess_status.status_name,rating.* FROM hostel,mess_data,mess_status,rating WHERE hostel.id = mess_data.hostel and mess_data.status = mess_status.status_code and mess_data.hostel = rating.hostel ORDER BY rating.food_rating',function(err,result){
            if(err){
                res.status(500).send(err.toString());
            } else{

@@ -152,36 +152,45 @@ app.post('/send-feedback-for-messes',function(req,res){
     var hostelId = req.body.hostel_id;
     var username = req.body.username;
     
-    pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
+    pool.query('SELECT is_rated FROM user_data WHERE username = $1',[username],function(err,result){
         if(err){
-            res.status(500).send(err.toString);
+            
         }else{
-            var ratingFood = result.rows[0].food_rating;
-            var ratingCleaning = result.rows[0].cleaning_rating;
-            var users = result.rows[0].users;
-            
-            var updatedRatingFood = (ratingFood * users + foodRating)/(users + 1);
-            var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
-            var updatedUsers = users+1;
-            
-            console.log("Useanaa : "+username);
-            
-            pool.query('UPDATE rating SET food_rating = $1,cleaning_rating = $2,users = $3 WHERE hostel = $4',[updatedRatingFood,updatedRatingCleaning,updatedUsers,hostelId],function(err,result){
-                if(err){
-                    res.status(500).send(err.toString());
-                }else{
-                    pool.query('UPDATE user_data SET is_rated = true WHERE username = $1',[username],function(err,result){
-                        if(err){
-                            res.status(500).send(err.toString());
-                        }else{
-                            res.send(JSON.stringify({message:"Thankyou for the feedback"}));
-                        }
-                    });
-                }
-            });
+            if(!result.row[0].is_rated){
+                pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
+                    if(err){
+                        res.status(500).send(err.toString);
+                    }else{
+                        var ratingFood = result.rows[0].food_rating;
+                        var ratingCleaning = result.rows[0].cleaning_rating;
+                        var users = result.rows[0].users;
+                        
+                        var updatedRatingFood = (ratingFood * users + foodRating)/(users + 1);
+                        var updatedRatingCleaning = (ratingCleaning * users + cleaningRating)/(users + 1);
+                        var updatedUsers = users+1;
+                        
+                        console.log("Useanaa : "+username);
+                        
+                        pool.query('UPDATE rating SET food_rating = $1,cleaning_rating = $2,users = $3 WHERE hostel = $4',[updatedRatingFood,updatedRatingCleaning,updatedUsers,hostelId],function(err,result){
+                            if(err){
+                                res.status(500).send(err.toString());
+                            }else{
+                                pool.query('UPDATE user_data SET is_rated = true WHERE username = $1',[username],function(err,result){
+                                    if(err){
+                                        res.status(500).send(err.toString());
+                                    }else{
+                                        res.send(JSON.stringify({message:"Thankyou for the feedback"}));
+                                    }
+                                });
+                            }
+                         });
+                    }
+                });
+            }else{
+                res.send(JSON.stringify({message:"You have already rated a mess"}));
+            }
         }
     });
-    
 });
 
 // Allow insertion only when the user is logined check the session in case of browser

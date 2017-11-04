@@ -157,7 +157,7 @@ app.post('/send-feedback-for-messes',function(req,res){
         if(err){
             res.status(500).send(err.toString);
         }else{
-            var ratingFood = result.rows[0];
+            var ratingFood = result.rows[0][0]
             var ratingCleaning = result.rows[1];
             var users = result.rows[2];
             

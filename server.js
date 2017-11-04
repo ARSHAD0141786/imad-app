@@ -168,7 +168,7 @@ app.post('/send-feedback-for-messes',function(req,res){
             
             console.log("Values : kasd;l  "+updatedRatingFood+" "+updatedRatingCleaning+" "+updatedUsers);
             
-            pool.query('UPDATE rating SET food_rating = $1,cleaning_rating = $2,users = $3',[updatedRatingFood,updatedRatingCleaning,updatedUsers],function(err,result){
+            pool.query('UPDATE rating SET food_rating = $1,cleaning_rating = $2,users = $3 WHERE hostel = $4',[updatedRatingFood,updatedRatingCleaning,updatedUsers,hostelId],function(err,result){
                 if(err){
                     res.status(500).send(err.toString());
                 }else{

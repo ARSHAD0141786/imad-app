@@ -66,8 +66,6 @@ app.post('/login-for-my-app',function(req,res){
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);
                 if(hashedPass===dbString){
-                    
-                    
                     res.send(JSON.stringify(result.rows));
                 }else{
                     res.status(403).send('Incorrect Password');
@@ -157,7 +155,7 @@ app.post('/send-feedback-for-messes',function(req,res){
         if(err){
             res.status(500).send(err.toString);
         }else{
-            var ratingFood = result.rows[0][0]
+            var ratingFood = result.rows[0].row[0];
             var ratingCleaning = result.rows[1];
             var users = result.rows[2];
             

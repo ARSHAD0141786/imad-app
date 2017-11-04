@@ -171,8 +171,17 @@ app.post('/upload-data-on-my-app',function(req,res){
             });
         }
     });
-    
-    
+});
+
+app.get('/get-mess-rating-for-my-app',function(req,res){
+       
+       pool.query('SELECT food_rating,cleaning_rating,hostel.name FROM rating,hostel WHERE hostel.id=rating.hostel ORDER BY mess_data.rating_food desc ',function(err,result){
+           if(err){
+               res.status(500).send(err.toString());
+           } else{
+               res.send(JSON.stringify(result.rows));
+           }
+        });
 });
 
 app.post('/create-user',function(req,res){

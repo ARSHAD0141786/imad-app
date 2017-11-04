@@ -187,7 +187,7 @@ app.post('/send-feedback-for-messes',function(req,res){
                     }
                 });
             }else{
-                res.send(JSON.stringify({message:"You have already rated a mess"}));
+                res.status(500).send("You have already rated a mess");
             }
         }
     });

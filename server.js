@@ -102,6 +102,17 @@ app.post('/get-mess-data-for-my-app',function(req,res){
     });
 });
 
+app.get('/get-mess-ratings',function(req,res){
+    pool.query('SELECT hostel.hostel_name,rating.* FROM hostel,rating WHERE hostel.id = rating.hostel',function(err,result){
+        if(err){
+           res.status(500).send(err.toString());
+        } else{
+           res.send(JSON.stringify(result.rows));
+        }
+    });
+    
+});
+
 
 app.post('/create-worker-for-my-app',function(req,res){
     var username = req.body.username;

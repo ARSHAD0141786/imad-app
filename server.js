@@ -148,7 +148,7 @@ app.post('/worker-login-for-my-app',function(req,res){
                 var salt=dbString.split('$')[2];
                 var hashedPass=hash(password,salt);
                 if(hashedPass===dbString){
-                    res.send(JSON.stringify(result.rows));
+                    res.send(JSON.stringify(result.rows[0]));
                 }else{
                     res.status(403).send('Incorrect Password');
                 }

@@ -212,13 +212,29 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
-        if(err){
-            res.status(500).send(err.toString() + 'Server problem in inserting data');
-        }else{
-            res.send(JSON.stringify({message:"Data Uploaded successfully"}));
-        }
+    pool.query('SELECT status FROM mess_data',function(err,result){
+       if(err){
+             res.status(500).send(err.toString() + 'Server problem in inserting data');
+       }else{
+           var previous_status = result.rows[0].status;
+           if(previous_status == 0 && status == 1){
+               pool.query('UPDATE user_data SET is_rated = f',function(err,result){
+                   if(err){
+                       res.status(500).send(err.toString() + 'Server problem in inserting data');
+                   }
+               });
+           }
+            pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
+            if(err){
+                res.status(500).send(err.toString() + 'Server problem in inserting data');
+            }else{
+                res.send(JSON.stringify({message:"Data Uploaded successfully"}));
+            }
     });
+       }
+    });
+    
+    
 });
 
 app.get('/get-mess-rating-for-my-app',function(req,res){

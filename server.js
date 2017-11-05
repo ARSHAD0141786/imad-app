@@ -38,7 +38,6 @@ app.post('/create-user-for-my-app',function(req,res){
     var phone = req.body.phone;
     var branch = req.body.branch;
     
-    
     var salt = crypto.randomBytes(128).toString('hex');
     var dbString = hash(password,salt);
     pool.query('INSERT INTO "user_data" (username,password_string,name,hostel,branch,year,phone_number) VALUES ($1,$2,$3,$4,$5,$6,$7)',[username,dbString,name,hostel,branch,year,phone],function(err,result){
@@ -218,18 +217,19 @@ app.post('/upload-data-on-my-app',function(req,res){
        }else{
            var previous_status = result.rows[0].status;
            if(previous_status == 0 && status == 1){
-               pool.query('UPDATE user_data SET is_rated = f',function(err,result){
+               pool.query('UPDATE user_data SET is_rated = 'f''',function(err,result){
                    if(err){
                        res.status(500).send(err.toString() + 'Server problem in inserting data');
                    }
+                   pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
+                    if(err){
+                        res.status(500).send(err.toString() + 'Server problem in inserting data');
+                    }else{
+                        res.send(JSON.stringify({message:"Data Uploaded successfully"}));
+                    }
                });
            }
-            pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
-            if(err){
-                res.status(500).send(err.toString() + 'Server problem in inserting data');
-            }else{
-                res.send(JSON.stringify({message:"Data Uploaded successfully"}));
-            }
+            
     });
        }
     });

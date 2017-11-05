@@ -221,14 +221,15 @@ app.post('/upload-data-on-my-app',function(req,res){
                    if(err){
                        res.status(500).send(err.toString() + 'Server problem in inserting data');
                    }
-                   pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
-                    if(err){
-                        res.status(500).send(err.toString() + 'Server problem in inserting data');
-                    }else{
-                        res.send(JSON.stringify({message:"Data Uploaded successfully"}));
-                    }
-               });
-           });
+               }
+           }
+           pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
+               if(err){
+                    res.status(500).send(err.toString() + 'Server problem in inserting data');
+                }else{
+                    res.send(JSON.stringify({message:"Data Uploaded successfully"}));
+                }
+            });
            }  
         }
     });

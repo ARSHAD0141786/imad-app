@@ -136,7 +136,7 @@ app.post('/worker-login-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    pool.query('SELECT *FROM worker_data WHERE username = $1',[username],function(err,result){
+    pool.query('SELECT *FROM worker_data,hostel WHERE username = $1 AND worker_data.hostel = hostel.id',[username],function(err,result){
         if(err){
             res.status(500).send(err.toString());
         }else{

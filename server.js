@@ -212,17 +212,11 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('DELETE FROM mess_data WHERE hostel = $1',[hostel],function(err,result){
+    pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
         if(err){
-            res.status(500).send(err.toString() + 'Server problem in deleting record');
+            res.status(500).send(err.toString() + 'Server problem in inserting data');
         }else{
-            pool.query('INSERT INTO mess_data (hostel,is_menu_updated,items,status) VALUES($1,$2,$3,$4)',[hostel,isMenuUpdated,items,status],function(err,result){
-                if(err){
-                    res.status(500).send(err.toString() + 'Server problem in inserting data');
-                }else{
-                    res.send(JSON.stringify({message:"Data Uploaded successfully"}));
-                }
-            });
+            res.send(JSON.stringify({message:"Data Uploaded successfully"}));
         }
     });
 });

@@ -228,13 +228,10 @@ app.post('/upload-data-on-my-app',function(req,res){
                         res.send(JSON.stringify({message:"Data Uploaded successfully"}));
                     }
                });
-           }
-            
+           });
+           }  
+        }
     });
-       }
-    });
-    
-    
 });
 
 app.get('/get-mess-rating-for-my-app',function(req,res){

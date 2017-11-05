@@ -230,8 +230,7 @@ app.post('/upload-data-on-my-app',function(req,res){
                     res.send(JSON.stringify({message:"Data Uploaded successfully"}));
                 }
             });
-           }  
-        }
+         }  
     });
 });
 

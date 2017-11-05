@@ -34,7 +34,7 @@ app.post('/create-user-for-my-app',function(req,res){
     var password = req.body.password;
     var name = req.body.name;
     var year = req.body.year;
-    var hostel = req.body.hostel;
+    var hostel = req.body.hostelName;
     var phone = req.body.phone;
     var branch = req.body.branch;
     

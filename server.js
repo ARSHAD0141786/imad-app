@@ -53,7 +53,7 @@ app.post('/login-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    pool.query('SELECT *FROM user_data,branch,hostel WHERE username = $1 AND user_data.hostel = hostel.hostel_id AND user_data.branch= branch.id',[username],function(err,result){
+    pool.query('SELECT *FROM user_data,branch,hostel WHERE username = $1 AND user_data.hostel = hostel.hostel_id AND user_data.branch= branch.branch_id',[username],function(err,result){
         if(err){
             res.status(500).send(err.toString());
         }else{

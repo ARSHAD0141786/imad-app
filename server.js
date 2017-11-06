@@ -49,6 +49,22 @@ app.post('/create-user-for-my-app',function(req,res){
     });
 });
 
+app.post('/update-user-details',function(req,res){
+    var username = req.body.username;
+    var phone_number = req.body.phone;
+    var year = req.body.year;
+    var hostel = req.body.hostel_number;
+    var branch = req.body.branch;
+    
+    pool.query('UPDATE user_data SET year = $1 , phone_number = $2 , hostel = $3 , branch = $4 WHERE username = $5',[year,hostel,branch,username],function(err,result){
+        if(err){
+            res.status(500).send(err.toString()+' Data not updated');
+        }else{
+            res.send(JSON.stringify({message:"Updated successfully"}));
+        }
+    });
+});
+
 app.post('/login-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;

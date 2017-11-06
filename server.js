@@ -56,7 +56,7 @@ app.post('/update-user-details',function(req,res){
     var hostel = req.body.hostel_number;
     var branch = req.body.branch;
     
-    pool.query('UPDATE user_data SET year = $1 , phone_number = $2 , hostel = $3 , branch = $4 WHERE username = $5',[year,hostel,branch,username],function(err,result){
+    pool.query('UPDATE user_data SET year = $1 , phone_number = $2 , hostel = $3 , branch = $4 WHERE username = $5',[year,phone,hostel,branch,username],function(err,result){
         if(err){
             res.status(500).send(err.toString()+' Data not updated');
         }else{

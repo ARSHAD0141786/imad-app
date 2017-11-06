@@ -53,7 +53,7 @@ app.post('/login-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    pool.query('SELECT *FROM user_data,branch,hostel WHERE username = $1 AND user_data.hostel = hostel.id AND user_data.branch= branch.id',[username],function(err,result){
+    pool.query('SELECT *FROM user_data,branch,hostel WHERE username = $1 AND user_data.hostel = hostel.hostel_id AND user_data.branch= branch.id',[username],function(err,result){
         if(err){
             res.status(500).send(err.toString());
         }else{
@@ -76,7 +76,7 @@ app.post('/login-for-my-app',function(req,res){
 
 app.get('/get-mess-list-for-my-app',function(req,res){
     
-   pool.query('SELECT hostel.hostel_name,mess_data.*,mess_status.status_name,rating.* FROM hostel,mess_data,mess_status,rating WHERE hostel.id = mess_data.hostel and mess_data.status = mess_status.status_code and mess_data.hostel = rating.hostel ORDER BY mess_status.status_code desc ,mess_data.is_menu_updated desc, rating.food_rating desc',function(err,result){
+   pool.query('SELECT hostel.hostel_name,mess_data.*,mess_status.status_name,rating.* FROM hostel,mess_data,mess_status,rating WHERE hostel.hostel_id = mess_data.hostel and mess_data.status = mess_status.status_code and mess_data.hostel = rating.hostel ORDER BY mess_status.status_code desc ,mess_data.is_menu_updated desc, rating.food_rating desc',function(err,result){
            if(err){
                res.status(500).send(err.toString());
            } else{
@@ -102,7 +102,7 @@ app.post('/get-mess-data-for-my-app',function(req,res){
 });
 
 app.get('/get-mess-ratings',function(req,res){
-    pool.query('SELECT hostel.hostel_name,rating.* FROM hostel,rating WHERE hostel.id = rating.hostel',function(err,result){
+    pool.query('SELECT hostel.hostel_name,rating.* FROM hostel,rating WHERE hostel.hostel_id = rating.hostel',function(err,result){
         if(err){
            res.status(500).send(err.toString());
         } else{
@@ -135,7 +135,7 @@ app.post('/worker-login-for-my-app',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    pool.query('SELECT *FROM worker_data,hostel WHERE username = $1 AND worker_data.hostel = hostel.id',[username],function(err,result){
+    pool.query('SELECT *FROM worker_data,hostel WHERE username = $1 AND worker_data.hostel = hostel.hostel_id',[username],function(err,result){
         if(err){
             res.status(500).send(err.toString());
         }else{
@@ -236,7 +236,7 @@ app.post('/upload-data-on-my-app',function(req,res){
 
 app.get('/get-mess-rating-for-my-app',function(req,res){
        
-       pool.query('SELECT food_rating,cleaning_rating,hostel.name FROM rating,hostel WHERE hostel.id=rating.hostel ',function(err,result){
+       pool.query('SELECT food_rating,cleaning_rating,hostel.name FROM rating,hostel WHERE hostel.hostel_id=rating.hostel ',function(err,result){
            if(err){
                res.status(500).send(err.toString());
            } else{

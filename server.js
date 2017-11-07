@@ -178,7 +178,7 @@ app.post('/worker-login-for-my-app',function(req,res){
 app.post('/send-feedback-for-messes',function(req,res){
     var foodRating = req.body.food_rating;
     var cleaningRating = req.body.cleaning_rating;
-    var hostelId = req.body.hostel_id;
+    var hostelId = req.body.hostelId;
     var username = req.body.username;
     
     pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result1){

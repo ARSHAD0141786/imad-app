@@ -175,6 +175,10 @@ app.post('/worker-login-for-my-app',function(req,res){
     });
 });
 
+var cur_on = 2;
+var cur_off = 1;
+var temp_off = 0;
+    
 app.post('/send-feedback-for-messes',function(req,res){
     var foodRating = req.body.food_rating;
     var cleaningRating = req.body.cleaning_rating;
@@ -183,9 +187,10 @@ app.post('/send-feedback-for-messes',function(req,res){
     
     pool.query("SELECT *FROM mess_data WHERE hostel = $1",[hostelId],function(err,result){
         if(err){
-            res.send(JSON.stringify({message:"This is currently OFF\nPlease refresh the mess list first"}));
+            res.status(500).send(err.toString());
         }else{
-            pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
+            if(result.rows[0].status == cur_on ){
+                pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
         if(err){
             res.status(500).send(err.toString);
         }else{
@@ -212,9 +217,6 @@ app.post('/send-feedback-for-messes',function(req,res){
                                         res.send(JSON.stringify({message:"Thankyou for the feedback"}));
                                     }
                                 });
-                        
-                        
-                        
                     }
                     });
                     }
@@ -224,6 +226,9 @@ app.post('/send-feedback-for-messes',function(req,res){
             }
         }
     });
+            }else{
+                res.send(JSON.stringify({message:"This is currently OFF\nPlease refresh the mess list first"}));
+            }         
         }
     });  
     
@@ -236,9 +241,6 @@ app.post('/upload-data-on-my-app',function(req,res){
     var status = req.body.status;
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
-    var cur_on = 2;
-    var cur_off = 1;
-    var temp_off = 0;
     
     pool.query('SELECT status FROM mess_data',function(err,result){
        if(err){

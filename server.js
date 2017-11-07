@@ -186,6 +186,7 @@ app.post('/send-feedback-for-messes',function(req,res){
             res.status(500).send(err.toString);
         }else{
             if(!result1.rows[0].is_rated){
+                console.log('hostel : '+hostelId)
                 pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
                     if(err){
                         res.status(500).send(err.toString);

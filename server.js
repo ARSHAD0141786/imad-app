@@ -235,9 +235,9 @@ app.post('/upload-data-on-my-app',function(req,res){
     
     pool.query('SELECT status FROM mess_data',function(err,result){
        if(err){
-           console.log('pre : '+result.rows[0].status+' now : '+status);
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
+           console.log('pre : '+result.rows[0].status+' now : '+status);
            var previous_status = result.rows[0].status;
            if(previous_status < cur_on && status == cur_on){
                console.log('asd');

@@ -191,7 +191,6 @@ app.post('/send-feedback-for-messes',function(req,res){
                     if(err){
                         res.status(500).send(err.toString);
                     }else{
-                        console.log('sdfl : '+result+' asdkl : '+result.rows[0]);
                         var ratingFood = result.rows[0].food_rating;
                         var ratingCleaning = result.rows[0].cleaning_rating;
                         var users = result.rows[0].users;
@@ -240,8 +239,13 @@ app.post('/upload-data-on-my-app',function(req,res){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
            if(status == cur_on){
-               console.log('asd');
+               // for more precesion and for more consistency both below queries should be execute at the same time
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
+                   if(err){
+                       res.status(500).send(err.toString() + 'Server problem in inserting data');
+                   }
+               });
+               pool.query("UPDATE rating SET food_rating = 0 , cleaning_rating = 0 , users = 0 WHERE hostel = $1",[hostel],function(err,result){
                    if(err){
                        res.status(500).send(err.toString() + 'Server problem in inserting data');
                    }

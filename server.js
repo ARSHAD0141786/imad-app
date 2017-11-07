@@ -237,9 +237,7 @@ app.post('/upload-data-on-my-app',function(req,res){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
-           console.log('pre : '+result.rows[0].status+' now : '+status);
-           var previous_status = result.rows[0].status;
-           if(previous_status < cur_on && status == cur_on){
+           if(status == cur_on){
                console.log('asd');
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
                    if(err){

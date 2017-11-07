@@ -181,11 +181,11 @@ app.post('/send-feedback-for-messes',function(req,res){
     var hostelId = req.body.hostel_id;
     var username = req.body.username;
     
-    pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result){
+    pool.query('SELECT *FROM user_data WHERE username = $1',[username],function(err,result1){
         if(err){
             res.status(500).send(err.toString);
         }else{
-            if(!result.rows[0].is_rated){
+            if(!result1.rows[0].is_rated){
                 pool.query('SELECT *FROM rating WHERE hostel=$1',[hostelId],function(err,result){
                     if(err){
                         res.status(500).send(err.toString);

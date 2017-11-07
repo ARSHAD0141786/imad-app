@@ -105,6 +105,7 @@ app.get('/get-mess-list-for-my-app',function(req,res){
 
 app.post('/get-mess-data-for-my-app',function(req,res){
     var hostel = req.body.hostel;
+    console.log('hostel : '+hostel);
     
     pool.query('SELECT *FROM mess_data WHERE hostel = $1',[hostel],function(err,result){
         if(err){

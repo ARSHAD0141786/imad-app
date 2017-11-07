@@ -229,13 +229,16 @@ app.post('/upload-data-on-my-app',function(req,res){
     var status = req.body.status;
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
+    var cur_on = 2;
+    var cur_off = 1;
+    var temp_off = 0;
     
     pool.query('SELECT status FROM mess_data',function(err,result){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
            var previous_status = result.rows[0].status;
-           if(previous_status == 0 && status == 1){
+           if(previous_status < cur_on && status == cur_on){
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
                    if(err){
                        res.status(500).send(err.toString() + 'Server problem in inserting data');

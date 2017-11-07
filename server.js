@@ -190,7 +190,7 @@ app.post('/send-feedback-for-messes',function(req,res){
                     if(err){
                         res.status(500).send(err.toString);
                     }else{
-                        console.log('sdfl : '+result+' asdkl : ');
+                        console.log('sdfl : '+result+' asdkl : '+result.rows);
                         var ratingFood = result.rows[0].food_rating;
                         var ratingCleaning = result.rows[0].cleaning_rating;
                         var users = result.rows[0].users;

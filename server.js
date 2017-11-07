@@ -114,7 +114,7 @@ app.post('/get-mess-data-for-my-app',function(req,res){
             if(result.rows.length === 0){
                 res.status(403).send('No data found');
             }else{
-                res.send(JSON.stringify(result.rows));
+                res.send(JSON.stringify(result.rows[0]));
             }
         }
     });

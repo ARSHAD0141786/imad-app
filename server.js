@@ -246,7 +246,6 @@ app.post('/upload-data-on-my-app',function(req,res){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
-           var pre_status = result.rows.
            if(status == cur_on){
                // for more precesion and for more consistency both below queries should be execute at the same time use stored procedures
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){

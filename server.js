@@ -242,10 +242,11 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('SELECT status FROM mess_data',function(err,result){
+    pool.query('SELECT status FROM mess_data WHERE ',function(err,result){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
+           var pre_status = result.rows.
            if(status == cur_on){
                // for more precesion and for more consistency both below queries should be execute at the same time use stored procedures
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
@@ -258,6 +259,9 @@ app.post('/upload-data-on-my-app',function(req,res){
                        res.status(500).send(err.toString() + 'Server problem in inserting data');
                    }
                });
+           }
+           else if(status == cur_off){
+               
            }
            pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
                if(err){

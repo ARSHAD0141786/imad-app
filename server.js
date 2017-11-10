@@ -242,7 +242,7 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('SELECT status FROM mess_data WHERE ',function(err,result){
+    pool.query('SELECT status FROM mess_data',function(err,result){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{

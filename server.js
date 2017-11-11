@@ -242,11 +242,11 @@ app.post('/upload-data-on-my-app',function(req,res){
     var isMenuUpdated = req.body.is_menu_updated;
     var hostel = req.body.hostel;
     
-    pool.query('SELECT status FROM mess_data',function(err,result){
+    pool.query('SELECT status FROM mess_data WHERE hostel = $1',[hostel],function(err,result){
        if(err){
              res.status(500).send(err.toString() + 'Server problem in inserting data');
        }else{
-           if(status == cur_on){
+           if(status == cur_on && result.rows[0].status == cur_off){
                // for more precesion and for more consistency both below queries should be execute at the same time use stored procedures
                pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
                    if(err){

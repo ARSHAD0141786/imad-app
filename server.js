@@ -259,8 +259,9 @@ app.post('/upload-data-on-my-app',function(req,res){
                    }
                });
            }
-           else if(status == cur_off){
-               
+           else if(status == cur_off && result.rows[0].status == cur_on){
+               items = NULL;
+               isMenuUpdated = 'f';
            }
            pool.query('UPDATE mess_data SET is_menu_updated = $1 , items = $2 , status = $3 WHERE hostel = $4',[isMenuUpdated,items,status,hostel],function(err,result){
                if(err){

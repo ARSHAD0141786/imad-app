@@ -252,13 +252,13 @@ app.post('/upload-data-on-my-app',function(req,res){
                    if(err){
                        
                    }else{
-                       if(result.rows.length === 0){
+                       //if(result.rows.length === 0){
                            pool.query("UPDATE user_data SET is_rated = 'f' ",function(err,result){
                             if(err){
                                 res.status(500).send(err.toString() + 'Server problem in inserting data');
                                 }
                             });
-                        }
+                        //}
                    }
                });
                pool.query("UPDATE rating SET food_rating = 0 , cleaning_rating = 0 , users = 0 WHERE hostel = $1",[hostel],function(err,result){

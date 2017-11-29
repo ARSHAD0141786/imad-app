@@ -337,6 +337,20 @@ app.post('/login',function(req,res){
     });
 });
 
+app.post('/checkuser',function(req,res){
+    var username = req.body.username;
+    pool.query('SELECT name FROM user_data where username = $1',[username],function(err,result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            if(result.rows.length===0){
+                res.status(403).send('User not exists');
+            }else{
+                res.send(JSON.stringify( {message:"User found"} ));
+            }
+        }
+    })
+})
 
 app.get('/check-login',function(req,res){
     if(req.session && req.session.auth && req.session.auth.userId){

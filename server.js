@@ -73,10 +73,10 @@ app.post('/login-for-my-app',function(req,res){
     
     pool.query('SELECT *FROM user_data,branch,hostel WHERE username = $1 AND user_data.hostel = hostel.hostel_id AND user_data.branch= branch.branch_id',[username],function(err,result){
         if(err){
-            res.status(500).send(err.toString());
+            res.status(500).send(JSON.stringify({status:0,message:err.toString()}));
         }else{
             if(result.rows.length===0){
-                res.status(403).send('No user found');
+                res.status(403).send(JSON.stringify({status:0,message:"No User Found"}));
             }else{
                 //match password
                 var dbString=result.rows[0].password_string;
@@ -85,7 +85,7 @@ app.post('/login-for-my-app',function(req,res){
                 if(hashedPass===dbString){
                     res.send(JSON.stringify(result.rows[0]));
                 }else{
-                    res.status(403).send('Incorrect Password');
+                    res.status(403).send(JSON.stringify({status:1,message:"Incorrect password"}));
                 }
             }
         }
